@@ -1,6 +1,7 @@
 from openai import OpenAI
 import streamlit as st
 import streamlit.components.v1 as components
+import os
 
 st.sidebar.title('Useful Links')
 link = st.sidebar.radio("Go to", ["시스템 동바리 설계 자동화 보고서", "Beam Design (RC vs. FRP)", "Column Design (RC vs. FRP)"], index=None)
@@ -25,7 +26,9 @@ if link:
 
 st.title("🦜 ChatGPT Test")
 
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+# api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+# client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 if "openai_model" not in st.session_state:
     st.session_state["openai_model"] = "gpt-4o"
