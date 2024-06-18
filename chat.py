@@ -4,27 +4,33 @@ import streamlit.components.v1 as components
 import os
 
 st.sidebar.title('Useful Links')
-link = st.sidebar.radio("Go to", ["시스템 동바리 설계 자동화 보고서", "Beam Design (RC vs. FRP)", "Column Design (RC vs. FRP)"], index=None)
 
-# 라디오 버튼이 선택된 경우 해당 사이트로 이동
-if link:
-    if '동바리' in link:
-        url = "https://support.streamlit.app"
-    elif 'Beam' in link:
-        url = "https://beam-frp.streamlit.app"
-    elif 'Column' in link:
-        url = "https://column.streamlit.app"
+st.sidebar.markdown('')
+st.sidebar.markdown("[:red[시스템 동바리 설계 자동화 보고서]](https://support.streamlit.app)")
+st.sidebar.markdown("[:green[Beam Design (RC vs. FRP)]](https://beam-frp.streamlit.app)")
+st.sidebar.markdown("[:blue[Column Design (RC vs. FRP)]](https://column.streamlit.app)")
+
+# link = st.sidebar.radio("Go to", ["시스템 동바리 설계 자동화 보고서", "Beam Design (RC vs. FRP)", "Column Design (RC vs. FRP)"], index=None)
+# # 라디오 버튼이 선택된 경우 해당 사이트로 이동
+# if link:
+#     if '동바리' in link:
+#         url = "https://support.streamlit.app"
+#     elif 'Beam' in link:
+#         url = "https://beam-frp.streamlit.app"
+#     elif 'Column' in link:
+#         url = "https://column.streamlit.app"    
     
-    # JavaScript to open the URL in a new tab
-    js = f"""
-    <script type="text/javascript">
-        window.open("{url}", "_blank");
-    </script>
-    """
-    # Display the JavaScript in the app
-    components.html(js)
+#     # JavaScript to open the URL in a new tab
+#     js = f"""
+#     <script type="text/javascript">
+#         window.open("{url}", "_blank");
+#     </script>
+#     """
+#     # Display the JavaScript in the app
+#     components.html(js)
 
-st.title("🦜 ChatGPT by 손병직")
+st.header("🦜 ChatGPT by 손병직")
+'';  ''
 
 # api_key = os.getenv("OPENAI_API_KEY")
 # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
