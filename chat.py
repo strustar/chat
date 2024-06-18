@@ -24,7 +24,7 @@ if link:
     # Display the JavaScript in the app
     components.html(js)
 
-st.title("🦜 ChatGPT Test")
+st.title("🦜 ChatGPT by 손병직")
 
 # api_key = os.getenv("OPENAI_API_KEY")
 # client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
