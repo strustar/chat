@@ -2,8 +2,6 @@ from openai import OpenAI
 import streamlit as st
 import streamlit.components.v1 as components
 import os
-import fitz
-import base64
 
 st.set_page_config(page_title = "AI Chatbot by 손병직", page_icon = "🦜", layout = "centered",    # centered, wide
                     initial_sidebar_state="expanded",
