@@ -2,34 +2,54 @@ from openai import OpenAI
 import streamlit as st
 import streamlit.components.v1 as components
 import os
+import fitz
+import base64
 
-st.sidebar.title('Useful Links')
+st.set_page_config(page_title = "AI Chatbot by 손병직", page_icon = "🦜", layout = "centered",    # centered, wide
+                    initial_sidebar_state="expanded",
+                    # runOnSave = True,
+                    menu_items = {        #   initial_sidebar_state="auto",  # Can be "auto", "expanded", "collapsed"
+                        # 'Get Help': 'https://www.extremelycoolapp.com/help',
+                        # 'Report a bug': "https://www.extremelycoolapp.com/bug",
+                        # 'About': "# This is a header. This is an *extremely* cool app!"
+                    })
 
+st.sidebar.title('My Websites')
 st.sidebar.markdown('')
 st.sidebar.markdown("[:red[시스템 동바리 설계 자동화 보고서]](https://support.streamlit.app)")
 st.sidebar.markdown("[:green[Beam Design (RC vs. FRP)]](https://beam-frp.streamlit.app)")
 st.sidebar.markdown("[:blue[Column Design (RC vs. FRP)]](https://column.streamlit.app)")
 
-# link = st.sidebar.radio("Go to", ["시스템 동바리 설계 자동화 보고서", "Beam Design (RC vs. FRP)", "Column Design (RC vs. FRP)"], index=None)
-# # 라디오 버튼이 선택된 경우 해당 사이트로 이동
-# if link:
-#     if '동바리' in link:
-#         url = "https://support.streamlit.app"
-#     elif 'Beam' in link:
-#         url = "https://beam-frp.streamlit.app"
-#     elif 'Column' in link:
-#         url = "https://column.streamlit.app"    
-    
-#     # JavaScript to open the URL in a new tab
-#     js = f"""
-#     <script type="text/javascript">
-#         window.open("{url}", "_blank");
-#     </script>
-#     """
-#     # Display the JavaScript in the app
-#     components.html(js)
+st.sidebar.title(':orange[Chatbot Links]')
+col = st.sidebar.columns(2)
+with col[0]:
+    st.markdown("[:orange[ChatGPT]](https://chatgpt.com/)")
+with col[1]:
+    st.markdown("[:orange[Claude]](https://claude.ai/)")
 
-st.header("🦜 ChatGPT by 손병직")
+# GitHub 저장소 정보
+github_repo = "strustar/chat"
+github_branch = "main"
+
+# PDF 파일 목록 (저장소에서 확인한 실제 파일들)
+pdf_files = {
+    "AI Chatbot 특강자료": "Chatbot 특강자료.pdf",
+    "CFD 유동해석에 의한 항력계수 산정 Ⅰ": "CFD 유동해석에 의한 항력계수 산정(건양대 손병직, 20240613).pdf",
+    "CFD 유동해석에 의한 항력계수 산정  Ⅱ": "CFD 유동해석에 의한 항력계수 산정(건양대 손병직, 20240613).pdf",    
+}
+
+# 사이드바에 PDF 파일 링크 추가
+st.sidebar.markdown('')
+st.sidebar.title("PDF Files")
+for title, filename in pdf_files.items():
+    # GitHub raw content URL 생성
+    github_url = f"https://github.com/{github_repo}/raw/{github_branch}/{filename}"
+    # URL 인코딩 처리
+    encoded_url = github_url.replace(" ", "%20")
+    st.sidebar.markdown(f"[{title}]({encoded_url})")
+
+
+st.header("🦜 AI Chatbot by 손병직")
 '';  ''
 
 # api_key = os.getenv("OPENAI_API_KEY")
@@ -62,28 +82,4 @@ if prompt := st.chat_input("What is up?"):
         )
         response = st.write_stream(stream)
     st.session_state.messages.append({"role": "assistant", "content": response})
-
-
-# import streamlit as st
-
-# st.set_page_config(page_title='ChatGPT', page_icon='🦜')
-# st.title('🦜 ChatGPT')
-
-# # 세션 상태에 'messages' 키가 없으면 빈 리스트로 초기화합니다.
-# if 'messages' not in st.session_state:
-#     st.session_state['messages'] = []
-
-# # 이전 대화를 출력해 주는 코드
-# if 'messages' in st.session_state and len(st.session_state['messages']) > 0:
-#     for role, msg, avatar in st.session_state['messages']:
-#         st.chat_message(role, avatar=avatar).write(msg)
-
-# if user_input := st.chat_input('메세지를 입력하세요'):
-#     st.chat_message('user', avatar='🧑‍🤝‍🧑').write(user_input)
-#     st.session_state['messages'].append(('user', user_input, '🧑‍🤝‍🧑'))
-
-#     with st.chat_message('ai', avatar='🤖'):
-#         msg = f'당신이 입력한 내용 : {user_input}'
-#         st.write(msg)
-#         st.session_state['messages'].append(('ai', msg, '🤖'))
 
